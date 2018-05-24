@@ -107,7 +107,7 @@ module outer_bevel() {
             cylinder(h=outer_bevel_height, r=mudguard_outer_radus+51, centre=false);
             translate([0,0,secondary_layer])
             cylinder(h=outer_bevel_height-secondary_layer, r1=mudguard_inner_radus,r2=mudguard_outer_radus, centre=false);
-            cylinder(h=secondary_layer, r1=mudguard_inner_radus-7,r2=mudguard_inner_radus, centre=false);
+            cylinder(h=secondary_layer, r1=mudguard_inner_radus-5,r2=mudguard_inner_radus, centre=false);
     }
 }
 

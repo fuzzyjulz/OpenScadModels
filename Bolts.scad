@@ -11,5 +11,5 @@ module m8_bolt(length) {
 }
 
 module m4_nut(length) {
-    cylinder(h=length, r=4.5, $fn=6);
+    cylinder(h=length, r=4.2, $fn=6);
 }
