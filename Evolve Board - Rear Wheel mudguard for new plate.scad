@@ -55,6 +55,11 @@ module mounting_holes_for_mudguard() {
         translate([70, 0, 0])
         m4_bolt(20);
     }
+    for (radius_deg = [-20:20:20]) {
+        rotate([0,0,radius_deg])
+        translate([70, 0, 0])
+        m4_bolt(20);
+    }
 }
 
 module internal_guard() {
@@ -102,6 +107,18 @@ module internal_guard() {
             difference() {
                 translate([65,-60,nothing])
                 cylinder(outer_bevel_height-nothing*2,d=63);
+                translate([55+21,-58+3,0])
+                rotate([0,0,10])
+                cube([50,50,100], true);
+                translate([0,0,-nothing])
+                cylinder(internal_guard_height, d=wheel_gear_diameter+8, false);
+                translate([0,0,-3.75])
+                resize([mudguard_inner_radus*2+inner_wheel_extra, mudguard_inner_radus*2+inner_wheel_extra, wheel_width+nothing])
+                wheel();
+            }
+            difference() {
+                translate([58,-90,nothing])
+                cylinder(outer_bevel_height-nothing*2,d=50);
                 translate([55+21,-58+3,0])
                 rotate([0,0,10])
                 cube([50,50,100], true);
