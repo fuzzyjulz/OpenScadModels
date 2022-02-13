@@ -1,46 +1,50 @@
 $fs = .03;
 $fa = 1;
 
-linear_extrude(.7)
-difference() {
-    treasureBanner();
+scale([7,7,7])
+union() {
+    linear_extrude(.7)
+    difference() {
+        treasureBanner();
+        treasure();
+    }
+
+
+    color("black")
+    linear_extrude(.3)
     treasure();
-}
 
-
-color("black")
-linear_extrude(.3)
-treasure();
-
-color("black")
-linear_extrude(.3)
-xMarks();
-
-linear_extrude(.5)
-difference() {
-    outerRing();
-    treasure();
+    /*color("black")
+    linear_extrude(.3)
     xMarks();
-    ringHoles();
-    mirror([1,0,0])
-    ringHoles();
-    bannerHoles();
-};
+    */
 
-linear_extrude(.7)
-difference() {
-    xMarksBanner();
-    xMarks();
-    bannerHoles();
-}
+    linear_extrude(.5)
+    difference() {
+        outerRing();
+        treasure();
+        //xMarks();
+        ringHoles();
+        mirror([1,0,0])
+        ringHoles();
+        bannerHoles();
+    };
 
-linear_extrude(1)
-bigX();
+    linear_extrude(.7)
+    difference() {
+        xMarksBanner();
+        //xMarks();
+        bannerHoles();
+    }
 
-linear_extrude(.5)
-difference() {
-    ringHolder();
-    ringHolderHoles();
+    linear_extrude(1)
+    bigX();
+
+    linear_extrude(.5)
+    difference() {
+        ringHolder();
+        ringHolderHoles();
+    }
 }
 module ringHolder() {
     difference() {
