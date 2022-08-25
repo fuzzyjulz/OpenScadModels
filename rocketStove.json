@@ -1,0 +1,12 @@
+{
+    "parameterSets": {
+        "design default values": {
+            "fullWidth_intake_gap": "25",
+            "intake_area": "6519",
+            "oven_height": "70",
+            "stove_length": "450",
+            "stove_width": "380"
+        }
+    },
+    "fileFormatVersion": "1"
+}
