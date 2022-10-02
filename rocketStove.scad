@@ -17,9 +17,9 @@ color([.6,.6,.6])
 innerBaffles();
 topPlate();
 
-color([.1,.8,.1])
-translate([stove_width/2,+13.5,0])
-fuelBasket();
+//color([.1,.8,.1])
+//translate([stove_width/2,+13.5,0])
+//fuelBasket();
 
 color([.1,.1,.6])
 flu();
@@ -28,8 +28,85 @@ largePan();
 
 pizzaStone();
 
-//color([.1,.1,.8],.3)
-//outerBox();
+color([.1,.1,.8],.3)
+outerBox();
+
+translate([stove_width/2,-44,-fullWidth_intake_gap])
+rotate([0,-90,270])
+fireBox();
+
+module fireBox() {
+    fireboxHeight = 170;
+    fireboxWidth = 80;
+    
+    
+    translate([-fireboxHeight-fullWidth_intake_gap-2,0,0])
+    fireboxOuter(fireboxHeight, fireboxWidth);
+
+    for (i = [0:1:1])
+    mirror([0,i,0]) {
+        translate([-fullWidth_intake_gap-2,-fireboxWidth/2-2,fireboxWidth/2 +2])
+        rotate([45+180,0,0])
+        rotate([0,90,0])
+        triangle_panel_2mm(fireboxWidth/2+18,"exhaustManifold");
+
+        translate([0,-fireboxWidth/2-2,fireboxWidth/2 +2])
+        rotate([45+180,0,0])
+        rotate([0,90,0])
+        triangle_panel_2mm(fireboxWidth/2+18,"exhaustManifold");
+        
+        translate([-fullWidth_intake_gap,-fireboxWidth/2-2,-fireboxWidth/2])
+        rotate([45+90,0,0])
+        panel_2mm([fullWidth_intake_gap,116], "Firebox fuel - exhaust manifold");
+    }
+
+    translate([0,-fireboxWidth/2-2,fireboxWidth/2+2])
+    rotate([0,90,0])
+    panel_2mm([fireboxWidth+2,fireboxWidth+4], "Firebox fuel - exhaust manifold top");
+
+    translate([0,-fireboxWidth/2-2,-fireboxWidth/2])
+    rotate([0,180,0])
+    panel_2mm([fullWidth_intake_gap+2,fireboxWidth+4], "Firebox fuel - exhaust manifold back");
+}
+
+module fireboxOuter(fireboxHeight, fireboxWidth) {
+    feedLength = 100;
+    fireboxFuelIntakeHeight = 50;
+    
+    echo (str("Firebox chimney area ",fireboxWidth*fireboxWidth,"mm^2"));
+    echo (str("Firebox intake area ",fireboxFuelIntakeHeight*fireboxWidth,"mm^2"));
+
+    for (i = [0,1,3]) {
+        rotate([i*90,0,0])
+        translate([0,-fireboxWidth/2,fireboxWidth/2])
+        panel_2mm([fireboxHeight, fireboxWidth], "Firebox side - Outer");
+    }
+
+    translate([70,0,-27])
+    rotate([0,60,0]) {
+        
+        for (i = [1:2:4]) {
+            rotate([i*90,0,0])
+            translate([0,-fireboxFuelIntakeHeight/2,fireboxWidth/2])
+            panel_2mm([feedLength, fireboxFuelIntakeHeight], "Firebox fuel - Feed Outer left/right");
+        }
+
+        translate([0,-fireboxWidth/2,-fireboxFuelIntakeHeight/2-2])
+        panel_2mm([feedLength, fireboxWidth], "Firebox fuel - Feed Outer bottom");
+
+        translate([33,-fireboxWidth/2,fireboxFuelIntakeHeight/2])
+        panel_2mm([feedLength-33, fireboxWidth], "Firebox fuel - Feed Outer top");
+    }
+    
+    translate([fireboxHeight,-fireboxWidth/2,-fireboxWidth/2])
+    rotate([0,180,0])
+    panel_2mm([fireboxHeight-108,fireboxWidth], "Firebox fuel - Top back");
+    
+    translate([0,-fireboxWidth/2,-fireboxWidth/2])
+    rotate([0,-90,0])
+    panel_2mm([fireboxWidth, fireboxWidth], "Firebox side - bottom");
+
+}
 
 module largePan() {
     panSize = 270;
@@ -112,8 +189,7 @@ module flu() {
     flueSideWidth = 127.3;
     fluHeight = 700;
 
-    translate([stove_width,0,-fullWidth_intake_gap*2])
-    rotate([0,0,45])
+    translate([stove_width/2,10,-fullWidth_intake_gap])
     union() {
         translate([-fluHoleHeight,fluHoleHeight+0.5,fullWidth_intake_gap])
         rotate([90,0,0])
@@ -149,7 +225,6 @@ module topPlate(){
     difference(){
         panel_5mm([stove_width, stove_length], "Top plate");
 
-        fluCutout_far();
         intake_hole();
     }
 }
