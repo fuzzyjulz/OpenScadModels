@@ -14,7 +14,13 @@ echo (str("actual intake area through stove ",fullWidth_intake_gap*stove_width,"
 outerside_height = fullWidth_intake_gap*2+oven_height;
 
 color([.6,.6,.6])
-innerBaffles();
+difference () {
+    innerBaffles();
+    
+    //Cutout for exhaust
+    translate([stove_width/2-90/2,0,-fullWidth_intake_gap*2-5])
+    cube([90,70,10]);
+}
 topPlate();
 
 //color([.1,.8,.1])
@@ -26,14 +32,40 @@ flu();
 
 largePan();
 
-pizzaStone();
+//pizzaStone();
+ovenTray();
+
+newFirebox = true;
+if (newFirebox) {
+    translate([stove_width/2,36,-fullWidth_intake_gap])
+    rotate([0,-90,270])
+    fireBox_v2();
+} else {
+    translate([stove_width/2,-44,-fullWidth_intake_gap])
+    rotate([0,-90,270])
+    fireBox();
+}
 
 color([.1,.1,.8],.3)
 outerBox();
 
-translate([stove_width/2,-44,-fullWidth_intake_gap])
-rotate([0,-90,270])
-fireBox();
+module ovenTray() {
+    translate([10,75,-fullWidth_intake_gap*2-oven_height])
+    cube([stove_width-20,375,10]);
+}
+
+
+module fireBox_v2() {
+    fireboxHeight = 115;
+    fireboxWidth = 90;
+    fireboxDepth = 70;
+    
+    
+    translate([-fireboxHeight-fullWidth_intake_gap-2,0,0])
+    fireboxOuter_v2(fireboxHeight, fireboxWidth, fireboxDepth);
+
+}
+
 
 module fireBox() {
     fireboxHeight = 170;
@@ -67,6 +99,49 @@ module fireBox() {
     translate([0,-fireboxWidth/2-2,-fireboxWidth/2])
     rotate([0,180,0])
     panel_2mm([fullWidth_intake_gap+2,fireboxWidth+4], "Firebox fuel - exhaust manifold back");
+}
+
+module fireboxOuter_v2(fireboxHeight, fireboxWidth,fireboxDepth) {
+    feedLength = 100;
+    fireboxFuelIntakeHeight = 50;
+    
+    echo (str("Firebox chimney area ",fireboxWidth*fireboxDepth,"mm^2"));
+    echo (str("Firebox intake area ",fireboxFuelIntakeHeight*fireboxWidth,"mm^2"));
+
+    rotate([i*90,0,0])
+    translate([0,-fireboxWidth/2,fireboxDepth/2])
+    panel_2mm([fireboxHeight, fireboxWidth], "Firebox side - Outer");
+
+    for (i = [1,3,3]) {
+        rotate([i*90,0,0])
+        translate([0,-fireboxDepth/2,fireboxWidth/2])
+        panel_2mm([fireboxHeight, fireboxDepth], "Firebox side - Outer");
+    }
+
+    #translate([70,0,-20])
+    rotate([0,60,0]) {
+        
+        for (i = [1:2:4]) {
+            rotate([i*90,0,0])
+            translate([0,-fireboxFuelIntakeHeight/2,fireboxWidth/2])
+            panel_2mm([feedLength, fireboxFuelIntakeHeight], "Firebox fuel - Feed Outer left/right");
+        }
+
+        translate([0,-fireboxWidth/2,-fireboxFuelIntakeHeight/2-2])
+        panel_2mm([feedLength, fireboxWidth], "Firebox fuel - Feed Outer bottom");
+
+        translate([33,-fireboxWidth/2,fireboxFuelIntakeHeight/2])
+        panel_2mm([feedLength-33, fireboxWidth], "Firebox fuel - Feed Outer top");
+    }
+    
+    //translate([fireboxHeight,-fireboxWidth/2,-fireboxWidth/2])
+    //rotate([0,180,0])
+    //panel_2mm([fireboxHeight-108,fireboxWidth], "Firebox fuel - Top back");
+    
+    translate([0,-fireboxWidth/2,-fireboxDepth/2])
+    rotate([0,-90,0])
+    panel_2mm([fireboxDepth, fireboxWidth], "Firebox side - bottom");
+
 }
 
 module fireboxOuter(fireboxHeight, fireboxWidth) {
