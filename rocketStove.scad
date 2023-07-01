@@ -11,16 +11,18 @@ echo (str("ideal intake gap ",intake_area/stove_width,"mm"));
 echo (str("actual intake gap ",fullWidth_intake_gap,"mm"));
 echo (str("actual intake area through stove ",fullWidth_intake_gap*stove_width,"mm"));
 
-outerside_height = fullWidth_intake_gap*2+oven_height;
+outerside_height = fullWidth_intake_gap+oven_height;
 
 color([.6,.6,.6])
 difference () {
     innerBaffles();
     
     //Cutout for exhaust
-    translate([stove_width/2-90/2,0,-fullWidth_intake_gap*2-5])
+    translate([stove_width/2-90/2,0,-fullWidth_intake_gap-5])
     cube([90,70,10]);
 }
+translate([stove_width,stove_length,0])
+rotate([0,0,180])
 topPlate();
 
 //color([.1,.8,.1])
@@ -28,8 +30,12 @@ topPlate();
 //fuelBasket();
 
 color([.1,.1,.6])
+translate([stove_width,stove_length,0])
+rotate([0,0,180])
 flu();
 
+translate([stove_width,stove_length,0])
+rotate([0,0,180])
 largePan();
 
 //pizzaStone();
@@ -37,7 +43,7 @@ ovenTray();
 
 newFirebox = true;
 if (newFirebox) {
-    translate([stove_width/2,36,-fullWidth_intake_gap])
+    translate([stove_width/2,36,0])
     rotate([0,-90,270])
     fireBox_v2();
 } else {
@@ -50,13 +56,13 @@ color([.1,.1,.8],.3)
 outerBox();
 
 module ovenTray() {
-    translate([10,75,-fullWidth_intake_gap*2-oven_height])
+    translate([10,75,-fullWidth_intake_gap-oven_height])
     cube([stove_width-20,375,10]);
 }
 
 
 module fireBox_v2() {
-    fireboxHeight = 115;
+    fireboxHeight = 185;
     fireboxWidth = 90;
     fireboxDepth = 70;
     
@@ -306,30 +312,10 @@ module topPlate(){
 
 module innerBaffles() {
     baffle_thickness = 2;
-    sideBaffleWidth = 2*stove_width/3-14.8;
     
-    translate([0,0,-fullWidth_intake_gap])
-    difference(){
-
-        panel_2mm([stove_width, stove_length-fullWidth_intake_gap], "Inner Baffle, Upper Plate");
-        fluCutout();
-    }
-
-    translate([0,0,-(fullWidth_intake_gap*2+baffle_thickness)])
+    translate([0,0,-(fullWidth_intake_gap+baffle_thickness)])
     panel_2mm([stove_width, stove_length], "Inner Baffle, lower Plate");
 
-    translate([0,              stove_width/2-20+2-baffle_thickness/2,-fullWidth_intake_gap+baffle_thickness])
-    rotate([90,0,-45])
-    panel_2mm([sideBaffleWidth, fullWidth_intake_gap-baffle_thickness], "Inner Baffle, edges");
-
-    translate([stove_width+1.4,stove_width/2-19.5-baffle_thickness/2,-fullWidth_intake_gap+baffle_thickness])
-    rotate([90,0,45+180])
-    panel_2mm([sideBaffleWidth, fullWidth_intake_gap-baffle_thickness], "Inner Baffle, edges");
-    
-    //small inner baffle for center
-    translate([(stove_width/3*2)-50,stove_length-fullWidth_intake_gap,0])
-    rotate([-90,0,0])
-    panel_2mm([50, fullWidth_intake_gap-baffle_thickness], "Inner Baffle, vertical");
 }
 
 module outerBox(){
