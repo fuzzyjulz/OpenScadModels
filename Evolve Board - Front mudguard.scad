@@ -1,6 +1,6 @@
 include <Bolts.scad>
 include <ComplexShapes.scad>
-$fa=3;
+//$fa=3;
 
 wheel_outer_radus = 90;
 wheel_inner_max_radius = 65;
@@ -25,7 +25,7 @@ attachment_piece_gap = 1;
 //%wheel();
 //%axle();
 axle_piece();
-axle_attachment_piece_1();
+//axle_attachment_piece_1();
 //#axle_attach_bolts_and_holes();
 
 module axle_piece() {
@@ -100,20 +100,20 @@ module axle_attachment() {
             union() {
                 translate([0,0,-1])
                 cylinder(h=19, r=70);
-                cylinder(h=18, r=49.7, centre=false);
+                cylinder(h=18, r=49.7, center=false);
             }
             axle();
         }
         union() {
             hull() {
             translate([0,0,-26])
-            cylinder(h=52, r=25, centre=false);
+            cylinder(h=52, r=25, center=false);
 
             translate([25,-5,-26])
-            cylinder(h=52, r=25, centre=false);
+            cylinder(h=52, r=25, center=false);
 
             translate([5,25,-26])
-            cylinder(h=52, r=25, centre=false);
+            cylinder(h=52, r=25, center=false);
             }
 
             translate([0,5,0])
@@ -155,13 +155,13 @@ module inner_guard() {
     intersection() {
         difference() {
             translate([0,0,-1+nothing])
-            cylinder(h=outer_bevel_height-nothing*3, r=mudguard_outer_radus+50, centre=false);
+            cylinder(h=outer_bevel_height-nothing*3, r=mudguard_outer_radus+50, center=false);
             outer_bevel();
             mudguard_inner();
             translate([0,0,18])
-            cylinder(h=outer_bevel_height, r=mudguard_inner_radus-15, centre=false);
+            cylinder(h=outer_bevel_height, r=mudguard_inner_radus-15, center=false);
             translate([0,0,-1])
-            cylinder(h=outer_bevel_height, r=50, centre=false);
+            cylinder(h=outer_bevel_height, r=50, center=false);
         }
         translate([15,15,motor_mount_to_wheel_centre])
         resize([0,0,100])
@@ -234,13 +234,13 @@ module outer_bevel() {
     
     difference() {
             translate([0,0,-1])
-            cylinder(h=outer_bevel_height+1, r=mudguard_outer_radus+51, centre=false);
+            cylinder(h=outer_bevel_height+1, r=mudguard_outer_radus+51, center=false);
             translate([0,0,secondary_layer])
-            cylinder(h=outer_bevel_height-secondary_layer, r1=secondary_layer_radius,r2=mudguard_outer_radus+.3, centre=false);
+            cylinder(h=outer_bevel_height-secondary_layer, r1=secondary_layer_radius,r2=mudguard_outer_radus+.3, center=false);
             translate([0,0,third_layer])
-            cylinder(h=secondary_layer-third_layer, r1=third_layer_radius,r2=secondary_layer_radius, centre=false);
+            cylinder(h=secondary_layer-third_layer, r1=third_layer_radius,r2=secondary_layer_radius, center=false);
             translate([0,0,-1])
-            cylinder(h=third_layer+1, r1=fourth_layer_radius,r2=third_layer_radius, centre=false);
+            cylinder(h=third_layer+1, r1=fourth_layer_radius,r2=third_layer_radius, center=false);
     }
 }
 

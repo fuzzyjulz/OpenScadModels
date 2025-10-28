@@ -36,7 +36,7 @@ difference() {
             mudguard();
             
             translate([0,pinion_to_hub_centre,0])
-            cylinder(wheel_width, d1=55, d2=75, false);
+            cylinder(wheel_width, d1=55, d2=75, center=false);
 
         }
         //cover();
@@ -71,16 +71,16 @@ module internal_guard() {
                 rotate([0,0,22.5])
                 translate([0,0,0+nothing])
                 intersection() {
-                    cylinder(outer_bevel_height, r=mudguard_outer_radus, false);
+                    cylinder(outer_bevel_height, r=mudguard_outer_radus, center=false);
                     rotate([90,0,0])
                     {
                         translate([40,-wheel_width/2+5,-110])
                         cube([mudguard_outer_radus*2,outer_bevel_height*2,mudguard_outer_radus*2],false);
                     }
                 }
-                cylinder(internal_guard_height, d=wheel_gear_diameter+8, false);
+                cylinder(internal_guard_height, d=wheel_gear_diameter+8, center=false);
                 translate([0,pinion_to_hub_centre,0])
-                cylinder(internal_guard_height, d=mount_block_diameter, false);
+                cylinder(internal_guard_height, d=mount_block_diameter, center=false);
                 translate([0,0,-3.75])
                 resize([mudguard_inner_radus*2+inner_wheel_extra, mudguard_inner_radus*2+inner_wheel_extra, wheel_width+nothing])
                 wheel();
@@ -90,16 +90,16 @@ module internal_guard() {
                 rotate([0,0,10])
                 translate([0,0,0+nothing])
                 intersection() {
-                    cylinder(outer_bevel_height, r=mudguard_outer_radus, false);
+                    cylinder(outer_bevel_height, r=mudguard_outer_radus, center=false);
                     rotate([90,0,0])
                     {
                         translate([40,-wheel_width/2+5,0])
                         cube([mudguard_outer_radus*2,outer_bevel_height*2,mudguard_outer_radus],false);
                     }
                 }
-                cylinder(internal_guard_height, d=wheel_gear_diameter+8, false);
+                cylinder(internal_guard_height, d=wheel_gear_diameter+8, center=false);
                 translate([0,pinion_to_hub_centre,0])
-                cylinder(internal_guard_height, d=mount_block_diameter, false);
+                cylinder(internal_guard_height, d=mount_block_diameter, center=false);
                 translate([0,0,-3.75])
                 resize([mudguard_inner_radus*2+inner_wheel_extra, mudguard_inner_radus*2+inner_wheel_extra, wheel_width+nothing])
                 wheel();
@@ -111,7 +111,7 @@ module internal_guard() {
                 rotate([0,0,10])
                 cube([50,50,100], true);
                 translate([0,0,-nothing])
-                cylinder(internal_guard_height, d=wheel_gear_diameter+8, false);
+                cylinder(internal_guard_height, d=wheel_gear_diameter+8, center=false);
                 translate([0,0,-3.75])
                 resize([mudguard_inner_radus*2+inner_wheel_extra, mudguard_inner_radus*2+inner_wheel_extra, wheel_width+nothing])
                 wheel();
@@ -123,7 +123,7 @@ module internal_guard() {
                 rotate([0,0,10])
                 cube([50,50,100], true);
                 translate([0,0,-nothing])
-                cylinder(internal_guard_height, d=wheel_gear_diameter+8, false);
+                cylinder(internal_guard_height, d=wheel_gear_diameter+8, center=false);
                 translate([0,0,-3.75])
                 resize([mudguard_inner_radus*2+inner_wheel_extra, mudguard_inner_radus*2+inner_wheel_extra, wheel_width+nothing])
                 wheel();
@@ -133,7 +133,7 @@ module internal_guard() {
             resize([mudguard_inner_radus*2, mudguard_inner_radus*2, wheel_width+nothing])
             wheel();
             translate([0,0,internal_guard_height])
-            cylinder(internal_guard_height+5, d1=mudguard_inner_radus*2-45,d2=mudguard_inner_radus*2-25, false);
+            cylinder(internal_guard_height+5, d1=mudguard_inner_radus*2-45,d2=mudguard_inner_radus*2-25, center=false);
             translate([0,pinion_to_hub_centre,0])
             cylinder(wheel_width, d1=55, d2=75, false);
         }
@@ -144,10 +144,10 @@ module outer_bevel() {
     secondary_layer = 15;
     
     difference() {
-            cylinder(h=outer_bevel_height, r=mudguard_outer_radus+51, centre=false);
+            cylinder(h=outer_bevel_height, r=mudguard_outer_radus+51, center=false);
             translate([0,0,secondary_layer])
-            cylinder(h=outer_bevel_height-secondary_layer, r1=mudguard_inner_radus,r2=mudguard_outer_radus, centre=false);
-            cylinder(h=secondary_layer, r1=mudguard_inner_radus-5,r2=mudguard_inner_radus, centre=false);
+            cylinder(h=outer_bevel_height-secondary_layer, r1=mudguard_inner_radus,r2=mudguard_outer_radus, center=false);
+            cylinder(h=secondary_layer, r1=mudguard_inner_radus-5,r2=mudguard_inner_radus, center=false);
     }
 }
 
@@ -157,26 +157,26 @@ module cover() {
         {
             difference() {
                 union() {
-                    cylinder(sheild_height, d=mount_block_diameter, false);
+                    cylinder(sheild_height, d=mount_block_diameter, center=false);
                     translate([25,24,+nothing])
-                    cylinder(sheild_height, d=mount_block_diameter, false);
+                    cylinder(sheild_height, d=mount_block_diameter, center=false);
                     translate([-3,12,0+nothing])
-                    cylinder(sheild_height, d=55, false);
+                    cylinder(sheild_height, d=55, center=false);
                 }
                 translate([0,0,-nothing])
-                cylinder(pinion_height, d=mount_block_diameter-cover_inner_to_outer*2, false);
+                cylinder(pinion_height, d=mount_block_diameter-cover_inner_to_outer*2, center=false);
                 translate([-17,-5,-nothing])
-                cylinder(pinion_height, d=20, false);
+                cylinder(pinion_height, d=20, center=false);
                 translate([17,-5,-nothing])
-                cylinder(pinion_height, d=20, false);
+                cylinder(pinion_height, d=20, center=false);
                 translate([-10,0,-nothing])
-                cylinder(pinion_height, d=20, false);
+                cylinder(pinion_height, d=20, center=false);
                 translate([10,0,-nothing])
-                cylinder(pinion_height, d=20, false);
+                cylinder(pinion_height, d=20, center=false);
                 translate([0,18,-nothing])
-                cylinder(pinion_height, d=10, false);
+                cylinder(pinion_height, d=10, center=false);
                 translate([0,14,-nothing])
-                cylinder(pinion_height, d=12, false);
+                cylinder(pinion_height, d=12, center=false);
             }
         }
         mounting_holes();
@@ -185,9 +185,9 @@ module cover() {
 }
 
 module gearing() {
-    cylinder(pinion_height, d=wheel_gear_diameter, false);
+    cylinder(pinion_height, d=wheel_gear_diameter, center=false);
     translate([0,pinion_to_hub_centre,0])
-    cylinder(pinion_height, d=pinion_diameter, false);
+    cylinder(pinion_height, d=pinion_diameter, center=false);
 }
 
 module mudguard() {
@@ -199,7 +199,7 @@ module mudguard() {
 
             resize([mudguard_inner_radus*2, mudguard_inner_radus*2, wheel_width+nothing])
             wheel();
-            cylinder(100,mudguard_inner_radus+12,true);
+            cylinder(96,r=mudguard_inner_radus+12,center=true);
         }
         translate([25,0,motor_mount_to_wheel_centre])
         intersection () {
@@ -207,16 +207,16 @@ module mudguard() {
             rotate([90,0,0])
             {
                 translate([0,0,-mudguard_outer_radus])
-                cylinder(mudguard_intersecton, wheel_width/2, wheel_width/2);
+                cylinder(mudguard_intersecton, r=wheel_width/2);
                 translate([0,-wheel_width/2,-mudguard_outer_radus])
-                cube([mudguard_intersecton,wheel_width,mudguard_intersecton],false);
+                cube([mudguard_intersecton,wheel_width,mudguard_intersecton],center=false);
             }
             rotate([90,0,-20])
             union() {
                 translate([0,0,-mudguard_outer_radus])
-                cylinder(mudguard_intersecton, wheel_width/2, wheel_width/2);
+                cylinder(mudguard_intersecton, r=wheel_width/2);
                 translate([0,-wheel_width/2,-mudguard_outer_radus])
-                cube([mudguard_intersecton,wheel_width,mudguard_intersecton],false);
+                cube([mudguard_intersecton,wheel_width,mudguard_intersecton],center=false);
             }
         }
     }
@@ -224,7 +224,7 @@ module mudguard() {
 
 module mounting_bracket() {
     translate([0,pinion_to_hub_centre,-mount_block_thickness])
-    cylinder(mount_block_thickness, mount_block_diameter/2, mount_block_diameter/2);
+    cylinder(mount_block_thickness, r=mount_block_diameter/2);
 }
 
 module mounting_holes() {
@@ -244,17 +244,17 @@ module mounting_bolt_hole() {
 }
 
 module m4_bolt(length) {
-    cylinder(length, m4_bolt_hole_radius);
+    cylinder(length, r=m4_bolt_hole_radius);
 }
 
 module m8_bolt(length) {
-    cylinder(length, m8_bolt_hole_radius);
+    cylinder(length, r=m8_bolt_hole_radius);
 }
 
 module wheel() {
     translate([0,0,motor_mount_to_wheel_centre])
     intersection() {
         resize([wheel_outer_radus*2,wheel_outer_radus*2,100])sphere(wheel_outer_radus);
-        cylinder(wheel_width, wheel_outer_radus, wheel_outer_radus, true);
+        cylinder(wheel_width, r=wheel_outer_radus, center=true);
     }
 }
